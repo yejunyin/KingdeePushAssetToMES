@@ -36,6 +36,9 @@
     <Reference Include="Kingdee.BOS.App">
       <HintPath>D:\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.App.dll</HintPath>
     </Reference>
+    <Reference Include="Kingdee.BOS.App.Core">
+      <HintPath>D:\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.App.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Kingdee.BOS.Core">
       <HintPath>D:\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.Core.dll</HintPath>
     </Reference>
@@ -44,6 +47,18 @@
     </Reference>
     <Reference Include="Kingdee.BOS.ServiceHelper">
       <HintPath>D:\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.ServiceHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Kingdee.BOS.WebApi.Client">
+      <HintPath>D:\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.WebApi.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Kingdee.BOS.WebApi.FormService">
+      <HintPath>D:\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.WebApi.FormService.dll</HintPath>
+    </Reference>
+    <Reference Include="Kingdee.BOS.WebApi.Limit">
+      <HintPath>D:\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.WebApi.Limit.dll</HintPath>
+    </Reference>
+    <Reference Include="Kingdee.BOS.WebApi.ServicesStub">
+      <HintPath>D:\Kingdee\K3Cloud\WebSite\Bin\Kingdee.BOS.WebApi.ServicesStub.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -59,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssetCardPushService.cs" />
     <Compile Include="Listbuttonclass.cs" />
     <Compile Include="buttonclass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
