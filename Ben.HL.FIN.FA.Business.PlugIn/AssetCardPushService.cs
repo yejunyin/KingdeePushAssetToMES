@@ -170,13 +170,9 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                 }
 
                 // 单位
-                if (item["FUnitID"] != null)
+                if (item["FUnitID_FName"] != null)
                 {
-                    DynamicObject unitObj = item["FUnitID"] as DynamicObject;
-                    if (unitObj != null && unitObj["FName"] != null)
-                    {
-                        asset.unit = unitObj["FName"].ToString();
-                    }
+                    asset.unit = item["FUnitID_FName"].ToString();
                 }
 
                 // 数量
@@ -190,13 +186,9 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                 }
 
                 // 供应商
-                if (item["FSupplierID"] != null)
+                if (item["FSupplierID_FName"] != null)
                 {
-                    DynamicObject supplierObj = item["FSupplierID"] as DynamicObject;
-                    if (supplierObj != null && supplierObj["FName"] != null)
-                    {
-                        asset.supplier = supplierObj["FName"].ToString();
-                    }
+                    asset.supplier = item["FSupplierID_FName"].ToString();
                 }
 
                 // 出厂编码
@@ -217,43 +209,27 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                 }
 
                 // 存放地点
-                if (item["FPositionID"] != null)
+                if (item["FPositionID_FName"] != null)
                 {
-                    DynamicObject positionObj = item["FPositionID"] as DynamicObject;
-                    if (positionObj != null && positionObj["FName"] != null)
-                    {
-                        asset.storageLocation = positionObj["FName"].ToString();
-                    }
+                    asset.storageLocation = item["FPositionID_FName"].ToString();
                 }
 
                 // 使用部门
-                if (item["FAllocUseDeptID"] != null)
+                if (item["FAllocUseDeptID_FName"] != null)
                 {
-                    DynamicObject deptObj = item["FAllocUseDeptID"] as DynamicObject;
-                    if (deptObj != null && deptObj["FName"] != null)
-                    {
-                        asset.departmentName = deptObj["FName"].ToString();
-                    }
+                    asset.departmentName = item["FAllocUseDeptID_FName"].ToString();
                 }
 
                 // 设备类型
-                if (item["FAssetTypeID"] != null)
+                if (item["FAssetTypeID_FName"] != null)
                 {
-                    DynamicObject typeObj = item["FAssetTypeID"] as DynamicObject;
-                    if (typeObj != null && typeObj["FName"] != null)
-                    {
-                        asset.equipmentType = typeObj["FName"].ToString();
-                    }
+                    asset.equipmentType = item["FAssetTypeID_FName"].ToString();
                 }
 
                 // 负责人
-                if (item["FKEEPERID"] != null)
+                if (item["FKEEPERID_FName"] != null)
                 {
-                    DynamicObject keeperObj = item["FKEEPERID"] as DynamicObject;
-                    if (keeperObj != null && keeperObj["FName"] != null)
-                    {
-                        asset.manager = keeperObj["FName"].ToString();
-                    }
+                    asset.manager = item["FKEEPERID_FName"].ToString();
                 }
 
                 assetList.Add(asset);
