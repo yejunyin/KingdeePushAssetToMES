@@ -130,7 +130,11 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                     "FPositionID",
                     "FPositionID.FName",
                     "FKEEPERID",
-                    "FKEEPERID.FName"
+                    "FKEEPERID.FName",
+                    "F_BHD_Text_xzcbm",
+                    "FAllocUseDeptID.F_BHD_Costcenter",
+                    "FSpecification"
+
                 );
 
                 string ids = string.Join(",", billIds);
@@ -144,7 +148,7 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                 if (dataCollection != null && dataCollection.Count > 0)
                 {
                     // 调用Service的新方法转换
-                    return _pushService.GetAssetCardDataFromQuery(dataCollection);
+                    return GetAssetCardDataFromQuery(dataCollection);
                 }
                 else
                 {
@@ -157,6 +161,117 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
             }
 
             return new List<AssetCardModel>();
+        }
+
+        /// <summary>
+        /// 从查询结果获取资产卡片数据（用于列表批量推送）
+        /// </summary>
+        public List<AssetCardModel> GetAssetCardDataFromQuery(DynamicObjectCollection dataCollection)
+        {
+            var assetList = new List<AssetCardModel>();
+
+            if (dataCollection == null || dataCollection.Count == 0)
+                return assetList;
+
+            foreach (DynamicObject item in dataCollection)
+            {
+                var asset = new AssetCardModel();
+
+                // 资产编码
+                if (item["FAssetNO"] != null)
+                {
+                    asset.assetCode = item["FAssetNO"].ToString();
+                }
+
+                // 设备名称 - 主表字段
+                if (item["FName"] != null)
+                {
+                    asset.devName = item["FName"].ToString();
+                }
+
+                // 规格型号 - 明细字段
+                    if (item["FSpecification"] != null)
+                {
+                    asset.specificationAndModel = item["FSpecification"].ToString();
+                }
+
+                // 设备编码 - 明细字段
+                if (item["F_BHD_Text_xzcbm"] != null && item["F_BHD_Text_xzcbm"].ToString() != "")
+                {
+                    asset.devCode = item["F_BHD_Text_xzcbm"].ToString();
+                }
+                else
+                {
+                    asset.devCode = item["FAssetNO"].ToString();
+                }
+
+                // 单位
+                if (item["FUnitID_FName"] != null)
+                {
+                    asset.unit = item["FUnitID_FName"].ToString();
+                }
+
+                // 数量
+                if (item["FQuantity"] != null)
+                {
+                    decimal? quantityDecimal = item["FQuantity"] as decimal?;
+                    if (quantityDecimal.HasValue)
+                    {
+                        asset.quantity = (int)quantityDecimal.Value;
+                    }
+                }
+
+                // 供应商
+                if (item["FSupplierID_FName"] != null)
+                {
+                    asset.supplier = item["FSupplierID_FName"].ToString();
+                }
+
+                // 出厂编码
+                if (item["FNumber"] != null)
+                {
+                    asset.factoryLeaveCode = item["FNumber"].ToString();
+                }
+
+                // 购入日期
+                if (item["FAcctDate"] != null)
+                {
+                    DateTime acctDate = item["FAcctDate"] as DateTime? ?? DateTime.MinValue;
+                    if (acctDate != DateTime.MinValue)
+                    {
+                        asset.factoryLeaveDate = acctDate.ToString("yyyy-MM-dd");
+                        asset.purchaseDate = acctDate.ToString("yyyy-MM-dd");
+                    }
+                }
+
+                // 存放地点
+                if (item["FPositionID_FName"] != null)
+                {
+                    asset.storageLocation = item["FPositionID_FName"].ToString();
+                }
+
+                // 使用部门
+                if (item["FAllocUseDeptID_F_BHD_Costcenter"] != null)
+                {
+                    asset.departmentName = item["FAllocUseDeptID_F_BHD_Costcenter"].ToString();
+                }
+
+                // 设备类型
+                if (item["FAssetTypeID_FName"] != null)
+                {
+                    asset.equipmentType = item["FAssetTypeID_FName"].ToString();
+                }
+
+                // 负责人
+                if (item["FKEEPERID_FName"] != null)
+                {
+                    asset.manager = item["FKEEPERID_FName"].ToString();
+                }
+
+                assetList.Add(asset);
+            }
+
+            return assetList;
         }
 
         /// <summary>
