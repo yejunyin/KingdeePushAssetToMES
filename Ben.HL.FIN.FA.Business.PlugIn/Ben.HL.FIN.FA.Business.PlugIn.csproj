@@ -75,8 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetCardPushService.cs" />
-    <Compile Include="Listbuttonclass.cs" />
-    <Compile Include="buttonclass.cs" />
+    <Compile Include="ListAssetToMes.cs" />
+    <Compile Include="AssetToMes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

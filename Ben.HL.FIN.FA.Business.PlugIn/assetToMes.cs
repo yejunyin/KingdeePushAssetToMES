@@ -14,7 +14,7 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
 {
     [Kingdee.BOS.Util.HotUpdate]
     [Description("Ben-资产卡片审核推送")]
-    public class buttonclass : AbstractBillPlugIn
+    public class AssetToMes : AbstractBillPlugIn
     {
         private AssetCardPushService _pushService = new AssetCardPushService();
 
@@ -151,18 +151,18 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                 {
                     var asset = new AssetCardModel();
 
-                    if (entry["AssetNO"] != null)
+                    if (billData["Number"] != null)
                     {
-                        asset.assetCode = entry["AssetNO"].ToString();
+                        asset.assetCode = billData["Number"].ToString();//AssetNO
                     }
 
                     // 设备编码 - 明细字段
-                    if (billData["F_BHD_Text_xzcbm"] != null && billData["F_BHD_Text_xzcbm"].ToString() != "")
+                    if (billData["FdevCode"] != null && billData["FdevCode"].ToString().Trim() != "")//F_BHD_Text_xzcbm
                     {
-                        asset.devCode = billData["F_BHD_Text_xzcbm"].ToString();
+                        asset.devCode = billData["FdevCode"].ToString();
                     }
                     else {
-                        asset.devCode = entry["AssetNO"].ToString();
+                        asset.devCode = billData["Number"].ToString();
                     }
 
                     
@@ -210,7 +210,11 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                     }
 
                     // 出厂编码 - 主表字段
-                    if (billData["Number"] != null)
+                    if (billData["F_BHD_Text_xzcbm"] != null && billData["F_BHD_Text_xzcbm"].ToString().Trim() != "")
+                    {
+                        asset.factoryLeaveCode = billData["F_BHD_Text_xzcbm"].ToString();
+                    }
+                    else
                     {
                         asset.factoryLeaveCode = billData["Number"].ToString();
                     }

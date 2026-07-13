@@ -14,7 +14,7 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
 {
     [Kingdee.BOS.Util.HotUpdate]
     [Description("Ben-资产卡片列表审核推送")]
-    public class Listbuttonclass : AbstractListPlugIn
+    public class ListAssetToMes : AbstractListPlugIn
     {
         private AssetCardPushService _pushService = new AssetCardPushService();
 
@@ -131,6 +131,7 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                     "FKEEPERID",
                     "FKEEPERID.FName",
                     "F_BHD_Text_xzcbm",
+                    "FdevCode",
                     "FAllocUseDeptID.F_BHD_Costcenter",
                     "FSpecification"
 
@@ -177,9 +178,9 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                 var asset = new AssetCardModel();
 
                 // 资产编码
-                if (item["FAssetNO"] != null)
+                if (item["FNumber"] != null)
                 {
-                    asset.assetCode = item["FAssetNO"].ToString();
+                    asset.assetCode = item["FNumber"].ToString();
                 }
 
                 // 设备名称 - 主表字段
@@ -195,13 +196,13 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                 }
 
                 // 设备编码 - 明细字段
-                if (item["F_BHD_Text_xzcbm"] != null && item["F_BHD_Text_xzcbm"].ToString() != "")
-                {
-                    asset.devCode = item["F_BHD_Text_xzcbm"].ToString();
+                if (item["FdevCode"] != null && item["FdevCode"].ToString().Trim() != "" && item["FdevCode"].ToString().Trim() != "null")//F_BHD_Text_xzcbm
+                    {
+                        asset.devCode = item["FdevCode"].ToString();
                 }
                 else
                 {
-                    asset.devCode = item["FAssetNO"].ToString();
+                    asset.devCode = item["FNumber"].ToString();
                 }
 
                 // 单位
@@ -225,9 +226,13 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                 {
                     asset.supplier = item["FSupplierID_FName"].ToString();
                 }
-
-                // 出厂编码
-                if (item["FNumber"] != null)
+                
+                // 出厂编码 - 主表字段
+                if (item["F_BHD_Text_xzcbm"] != null && item["F_BHD_Text_xzcbm"].ToString().Trim() != "" && item["F_BHD_Text_xzcbm"].ToString().Trim() != "null")
+                {
+                    asset.factoryLeaveCode = item["F_BHD_Text_xzcbm"].ToString();
+                }
+                else
                 {
                     asset.factoryLeaveCode = item["FNumber"].ToString();
                 }
