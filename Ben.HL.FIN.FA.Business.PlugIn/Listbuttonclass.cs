@@ -20,12 +20,11 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
 
         public override void AfterDoOperation(AfterDoOperationEventArgs e)
         {
-            base.AfterDoOperation(e);
-
             if (e.Operation != null && e.Operation.Operation == "Audit")
             {
                 PushAfterAudit();
             }
+            base.AfterDoOperation(e);
         }
 
         private void PushAfterAudit()
