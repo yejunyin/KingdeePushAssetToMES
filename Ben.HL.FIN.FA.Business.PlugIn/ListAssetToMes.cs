@@ -200,6 +200,10 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                     {
                         asset.devCode = item["FdevCode"].ToString();
                 }
+                else if (item["F_BHD_Text_xzcbm"] != null && item["F_BHD_Text_xzcbm"].ToString().Trim() != "" && item["F_BHD_Text_xzcbm"].ToString().Trim() != "null")
+                {
+                    asset.devCode = item["F_BHD_Text_xzcbm"].ToString();
+                }
                 else
                 {
                     asset.devCode = item["FNumber"].ToString();

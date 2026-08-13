@@ -161,11 +161,17 @@ namespace Ben.HL.FIN.FA.Business.PlugIn
                     {
                         asset.devCode = billData["FdevCode"].ToString();
                     }
-                    else {
+                    else // 出厂编码 - 主表字段
+                    if (billData["F_BHD_Text_xzcbm"] != null && billData["F_BHD_Text_xzcbm"].ToString().Trim() != "")
+                    {
+                        asset.devCode = billData["F_BHD_Text_xzcbm"].ToString();
+                    }
+                    else
+                    {
                         asset.devCode = billData["Number"].ToString();
                     }
 
-                    
+
                     // 规格型号 - 明细字段
                     if (entry["Specification"] != null)
                     {
